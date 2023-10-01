@@ -1,125 +1,175 @@
 
 
-// simulador tienda de joyas
-
-
- let nombre = prompt("Ingrese su nombre")
- alert(`Bienvendo/a ${nombre} a nuestra tienda de joyas, esperamos puedas encontrar alguna joya de tu interés `)
- const IVA = 0.21
-
+// // simulador tienda Vintage
+ 
  class Tienda{
-     constructor( tipoI, caracI, precioI) {
-        this.tipo = tipoI;
-        this.carac = caracI;
-        this.precio = precioI;
+     constructor( categoria, carac, precio, imagen) {
+        this.tipo = categoria;
+        this.carac = carac;
+        this.precio = precio;
+        this.img =imagen
 }
         mostrarProducto(){
-            console.log(`· ${this.tipo} ${this.carac}, tiene un precio de $${this.precio}`)
+            console.log(`· ${this.carac}, tiene un precio de $${this.precio}`)
         }
         calcuIva = () =>{
+            const IVA = 0.21
            return  this.precio * IVA
             }
         precioMasIva = (resIva) =>{
-           console.log(`El precio del producto ${this.tipo}, con la suma del impuesto iva, que es del %${IVA}, da  la suma total de $` + (resIva + this.precio))
+           console.log(`El precio del producto ${this.carac}, con la suma del impuesto iva, que es del %${IVA}, da  la suma total de $` + (resIva + this.precio))
         }
  }
 
 
-const producto1 = new Tienda( "Collar", "de plata con piedra onix", 15000)
+const producto1 = new Tienda( "Antiguedades", "Relog antiguo de plata ", 15000, "relojdeplata.jpg")
 
-const producto2 = new Tienda("Aros", "de tipo argollas", 6000)
+const producto2 = new Tienda("Coleccionables", "Maquina de escribir ", 6000, "maquina-escribir.jpg")
 
-const producto3 = new Tienda("Anillo", "de plata con piedra rose", 20000)
+const producto3 = new Tienda("Antiguedades", "Estatua baiarines de porcelana", 20000, "porcelana.jpg")
 
-const producto4 = new Tienda( "Pulsera", "de plata con marcasitas", 9000)
+const producto4 = new Tienda( "Joyas", "Broche colibri de plata ", 9000, "joya1.jpg")
+ 
 
+let Productos = []
+    if(localStorage.getItem("Productos")){
+                    
+        for(let produc of JSON.parse(localStorage.getItem("Productos"))){
+              let producStorage = new Tienda (produc.tipo, produc.carac,produc.precio,produc.img )
+           Productos.push(producStorage)
+         }
+                
+     }else{
+    
+     Productos.push(producto1,producto2,producto3,producto4)
+     localStorage.setItem("Productos", JSON.stringify(Productos))
+  }
 
-const catProductos = [producto1, producto2, producto3, producto4]
+// CARACTERISTICAS DEL HEADER
 
+function ordenarMayorMenor(array){
+    let arrayMayorMenor = array.concat()
+     arrayMayorMenor.sort(
+        (produc1,produc2) => produc2.precio - produc1.precio
+    )
+    mostrarCatalogoDOM(arrayMayorMenor)
+}
+function ordenarMenorMayor(array){
+    let arrMenor = array.concat()
+    arrMenor.sort(
+        (p1, p2) => p1.precio - p2.precio
+    )
+    mostrarCatalogoDOM(arrMenor)
+}
 
-
- function menu (){
-    let salirMenu = false
-
- do{
-    let opcionIngresada = parseInt(prompt(`Ingrese el Nº de la opcion que desée;
-    1- mostrar catálogo de productos
-    2- Eliminar un producto
-    3- mostrar precios de los productos mas Iva
-    0- Salir de la tienda`))
-    switch(opcionIngresada){
-        case 1:
-            console.log(`Nuestro catálogo es; `) 
-            producto1.mostrarProducto()
-            producto2.mostrarProducto()
-            producto3.mostrarProducto()
-            producto4.mostrarProducto()  
-              
-            break
-        case 2:
-            let noElimMasProduc = false
-            do{
-                let eliminarP = parseInt(prompt(`Ingresa que producto deseas eliminar;
-                1- Eliminar el último producto del catálogo 
-                2- Eliminar el primer producto del catálogo
-                3- Eliminar mas de un producto
-                4- Mostrar catálogo original
-                o- No quiero eliminar más productos de la tienda`
-                ))
-                switch(eliminarP){
-                    case 1:
-                         catProductos.shift()
-                         console.log(catProductos)
-                    break
-                    case 2:
-                        catProductos.pop()
-                        console.log(catProductos)
-                    break
-                    case 3:
-                        let cantElim = parseInt(prompt(`Entre los 4 productos de nuestro catálogo, ingresa en numeros del 1 al 4 de la cantidad que deseas eliminar`))
-                        catProductos.splice(1,cantElim)
-                        console.log(catProductos)
-                        break
-                    case 4: 
-                    producto1.mostrarProducto()
-                    producto2.mostrarProducto()
-                    producto3.mostrarProducto()
-                    producto4.mostrarProducto()  
-                        
-                        break
-                    case 0:
-                        noElimMasProduc = true
-                    break
-                    default:
-                        console.log("Opción no válida")
-                    break
-
-                }
-            }while(!noElimMasProduc)
-            
-             break
-        case 3:
-             producto1.precioMasIva(producto1.calcuIva()),
-             producto2.precioMasIva(producto2.calcuIva())
-             producto3.precioMasIva(producto3.calcuIva())
-             producto4.precioMasIva(producto4.calcuIva()) 
-            break
-      
-         case 0:
-           console.log(`Saliste de la tienda, gracias ${nombre} por ver nuestro catálogo`)
-           salirMenu = true
-            break
-        default:
-            console.log("Opción no válida")
+let selectOrden = document.getElementById("selectOrden")
+selectOrden.addEventListener("change", () => {
+    switch(selectOrden.value){
+        case "1":
+            ordenarMayorMenor(Productos)
         break
-
+        case "2":
+            ordenarMenorMayor(Productos)
+        break
+        default:
+            mostrarCatalogoDOM(Productos)
+        break
     }
+})
 
- }while(!salirMenu)
- }
- menu()
+function buscarInfo(buscado,array){
+    let coincidencias = array.filter(
+        (producto) => {
+           return producto.tipo.toLowerCase().includes(buscado.toLowerCase()) || producto.carac.toLowerCase().includes(buscado.toLowerCase())
+        }
+    )
+    coincidencias.length > 0 ? (
+    mostrarCatalogoDOM(coincidencias), coincidencias.innerHTML ="") : (mostrarCatalogoDOM(array), coincidencias.innerHTML = `<h3>No hay coincidencias con su búsqueda, este es nuestro catálogo completo</h3>`) 
+}
+
+buscador.addEventListener("input", () => {
+    console.log(buscador.value)
+    buscarInfo(buscador.value,Productos)
+})
 
 
 
+
+           // Carrito
+               
+
+                
+            
+let productosCarrito = []
+
+
+function cargarProductosCarrito(array){
+    modalBodyCarrito.innerHTML = ""
+    array.forEach(
+        (productoCarrito) => {
+            modalBodyCarrito.innerHTML += `
+            <div class="card border-primary mb-3" id ="productoCarrito${productoCarrito.id}" style="max-width: 540px;">
+                 <img class="card-img-top" height="300px" src="assets/${productoCarrito.img}" alt="">
+                 <div class="card-body">
+                        <h4 class="card-title">${productoCarrito.tipo}</h4>
+                        <p class="card-text">${productoCarrito.carac}</p>
+                         <p class="card-text">$${productoCarrito.precio}</p> 
+                         <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
+                 </div>    
+            </div>
+            `
+        }
+    )
+    calcularTotal(array)    
+}
+function calcularTotal(array){
+    const totalReduce = array.reduce(
+        
+        (acumulador, producto)=>
+        {return acumulador + producto.precio},
+        0
+    )
+    totalReduce > 0 ? precioTotal.innerHTML = `<strong>El total de su compra es: ${totalReduce}</strong>` : precioTotal.innerHTML = `No hay productos en el carrito` 
+    
+}
+
+
+
+        //   MAIN Y PRODUCTOS
+
+let containerProductos = document.getElementById("productos")
+
+function mostrarCatalogoDOM(array){
+    containerProductos.innerHTML = ""
+    for(let producto of array){
+        let producNuevoDiv= document.createElement("div")
+        producNuevoDiv.className = "col-12 col-md-6 col-lg-4 my-4"
+        producNuevoDiv.innerHTML = `
+            <div id="${producto.tipo}" class="card" style="width: 20rem;">
+                    <img class="card-img-top img-fluid" style="height: 250px;"src="assets/${producto.img}" alt="${producto.tipo} ">
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p>${producto.tipo}</p>
+                        <p>${producto.carac}</p>
+                        <p class="">Precio: ${producto.precio}</p>
+                    <button id="comprar${producto.tipo}" class="btn btn-outline-success">Agregar al carrito</button>
+                    </div>
+           </div>`
+        containerProductos.append(producNuevoDiv)
+        let comprarbtn = document.getElementById(`comprar${producto.tipo}`)
+        comprarbtn.addEventListener("click",()=>{
+            // Pongo la funcion agregarAlCarrito pero no me la Toma, ademas me aparecen juntos los elementos de array o y 2, no se porque 
+            productosCarrito.push(producto)
+            localStorage.setItem("carrito", JSON.stringify(productosCarrito))
+        })
+    }
+}
+//  function agregarAlCarrito(elemento){
+//             productosCarrito.push(elemento),
+//             localStorage.setItem("carrito", JSON.stringify(productosCarrito))
+           
+//  }
+
+mostrarCatalogoDOM(Productos)
 
 

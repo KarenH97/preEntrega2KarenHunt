@@ -4,6 +4,7 @@
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="widt=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
 	rel="stylesheet" 
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
@@ -15,13 +16,38 @@
 </head>
 <body>       
 	<header>
-		<div class="nav-tit">
-			<nav>
-				<p>Vintage Hunters</p>
+		<div>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav me-auto mx-1">
+						 <form class="d-flex mx-3">
+						<input id="buscador"class="form-control me-2 " placeholder="Qué estas buscando?" aria-label="Search">
+						</form> 
+					    <button id="agregarLibro" data-bs-toggle="modal" data-bs-target="#idModalAgregarLibro" class="btn btn-success">Agregar producto</button>
+						<!-- <button id="btnToggle" class="btn btn-success mx-3">Dark</button>   -->
+						</ul>
+					<ul>
+					    <select id="selectOrden" class="form-select form-select-sm" aria-label=".form-select-sm example">
+							<option selected>Ordenar por precio</option>
+							<option value="1">Mayor a menor</option>
+							<option value="2">Menor a mayor</option>
+						  </select>
+					</ul>
+						 <ul style="list-style: none;"className="navbar-nav me-auto">  
+						  <li className="nav-item " >
+							  <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModalCarrito" class="btn btn-secondary"><i class="fas fa-shopping-cart fa-1x"></i></a>
+						  </li>
+					  </ul> 
+					   
+					  </div>
+					</div> 
+				  </nav>
+			
 			</nav>
 		</div>
 		<div class="container">
-			<h1>Tienda de joyas</h1>
+			<h1>Tienda Vintage</h1>
         <div class="container-icon">
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-cart">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
@@ -32,9 +58,9 @@
 			  <div class="container-cart-products hidden-cart">
 				<div class="cart-product">
 					<div class="info-cart-product">
-						<span class="cantidad-producto-carrito">1</span>
-						<p class="titulo-producto-carrito">Pájaro de plata</p>
-						<span class="precio-producto-carrito">$10000</span>
+						<span class="cantidad-producto-carrito"></span>
+						<p class="titulo-producto-carrito"></p>
+						<span class="precio-producto-carrito"></span>
 					</div>
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -43,11 +69,11 @@
 				</div>
 				<div class="cart-total">
 					<h3>Total</h3>
-					<span class="total-pagar">$13000</span>
+					<span class="total-pagar"></span>
 				</div>
 			  </div>
 			  
-		</div>
+		</div> 
 		</div>
 		
 	</header>
@@ -58,58 +84,88 @@
 
 	<main>
 		<div class="container-items">
-			<div class="item">
-				<figure>
-					<img src="assets/joya1.jpg" alt="pajaro de plata">
-				</figure>
-			<div class="info-produc">
-				<h2>Pájaro de plata</h2>
-				<h3 class="price">$10.000 </h3>
-				<button>Añadir al carrito</button>
+			<div id="productos" class="row">
+	
 			</div>
-		   </div>
-		  
-			<div class="item">
-				<figure>
-					<img src="assets/relojdeplata.jpg" alt="reloj de plata">
-				</figure>
-			<div class="info-produc">
-				<h2>Reloj antiguo</h2>
-				<h3 class="price">$25.000 </h3>
-				<button>Añadir al carrito</button>
-			</div>			
-		</div>
-		<div class="item">
+
+			 <!-- </div> 
+            <div class="container-items">
+		<div id="${producto.tipo} " class="item">
 			<figure>
-				<img src="assets/joya1.jpg" alt="pajaro de plata">
-			</figure>
-		<div class="info-produc">
-			<h2>Pájaro de plata</h2>
-			<h3 class="price">$10.000 </h3>
-			<button>Añadir al carrito</button>
-		</div>
-	   </div>
-	   <div class="item">
-		<figure>
-			<img src="assets/relojdeplata.jpg" alt="reloj de plata">
-		</figure>
-            <div class="info-produc">
-		    <h2>Reloj antiguo</h2>
-		    <h3 class="price">$25.000 </h3>
-		    <button>Añadir al carrito</button>
-	    </div>			
-        </div>
-			<div class="item">
-				<figure>
-					<img src="assets/relojdeplata.jpg" alt="reloj de plata">
+		 			<img src="assets/${producto.img} " alt="${producto.carac} ">
 				</figure>
-			<div class="info-produc">
-				<h2>Reloj antiguo</h2>
-				<h3 class="price">$25.000 </h3>
-				<button>Añadir al carrito</button>
-			</div>			
-		</div>
-		</div>
+		 	<div class="info-produc">
+		 		<h2>${producto.carac} </h2>
+		 		<h3 class="price">Precio $${producto.precio}  </h3>
+		 		<button>Añadir al carrito</button>
+	 	</div>
+		    </div> -->
+			
+    <!--Modal Agregar Libro-->
+    <div class="modal fade" id="idModalAgregarLibro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Agregar Libro</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+              <!--Formulario-->
+              <form id="formCargarLibro" class="my-4">
+                <div class="mb-3">
+                  <label for="titulo" class="form-label">Titulo</label>
+                  <input type="text" class="form-control" id="tituloInput" aria-describedby="titulo">
+                  
+                </div>
+                <div class="mb-3">
+                  <label for="autor" class="form-label">Autor</label>
+                  <input type="text" class="form-control" id="autorInput" aria-describedby="autor">
+                  
+                </div>
+                <div class="mb-3">
+                  <label for="precio" class="form-label">Precio:</label>
+                  <input type="text" class="form-control" id="precioInput" aria-describedby="precio">
+                  
+                </div>
+            </form>
+            <button type="text" id="guardarLibroBtn" class="btn btn-success" data-bs-dismiss="modal">Guardar Libro</button>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="text" id="guardarLibroBtn" class="btn btn-success" data-bs-dismiss="modal">Guardar Libro</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Modal Carrito-->
+      <div class="modal fade" id="idModalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Carrito de Compras</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-bodyCarrito">
+              
+            </div>
+            <div class="row ml-ato">
+              <p id="precioTotal"></p>
+            </div>
+            <div class="modal-footer">
+              
+              
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="botonFinalizarCompra">Finalizar Compra</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--Script de Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>  
+		
 	</main>
 
                 <!-- COMIENZO DE FOOTER -->

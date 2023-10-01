@@ -23,7 +23,7 @@ header{
  
 }
 
-.nav-tit{
+nav{
     width:100%;
     display: flex;
     justify-content: center;
@@ -154,12 +154,20 @@ header{
 
                   /* Comienzo del main */
 
-main{
+ main{
     margin: 0 auto;
     max-width: 1200px;
 }
+.card-img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    transition: all .5s;
 
+}
 
+/*
 .container-items{
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -215,7 +223,7 @@ main{
 .price{
     font-size: 18px;
     font-weight: 900;
-}
+} */
 
 
                     /* COMIENZO DEL FOOTER */
