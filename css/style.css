@@ -158,45 +158,37 @@ nav{
     margin: 0 auto;
     max-width: 1200px;
 }
-.card-img{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    transition: all .5s;
 
-}
 
-/*
-.container-items{
+/* .container-items{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 20px;
 
-}
+} */
 
-.item{
-   border-radius: 10px; 
+#productos{
+   border-radius: 10px;
+   color: #000; 
 }
-.item:hover{
+#productos:hover{
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
 }
 
-.item img{
+#productos img{
     width: 100%;
     height: 300px;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
     transition: all .5s;
-
-}
-
-.item figure{
     overflow: hidden;
+
 }
-.item:hover img{
+
+/* #productos:hover img{
     transform: scale(1.2);
-}
+} */
+/*
 .info-produc{
     padding: 15px 30px;
     line-height: 2;

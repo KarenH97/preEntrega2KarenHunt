@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "categoria":"Antiguedades" ,
+        "carac":"Relog antiguo de plata " ,
+        "precio":14000 ,
+        "img":"relojdeplata.jpg" 
+    },
+    {
+        "id": 2,
+        "categoria": "Coleccionables",
+        "carac":"Maquina de escribir " ,
+        "precio": 6000,
+        "img":"maquina-escribir.jpg" 
+
+    },
+    {
+        
+        "id": 3,
+        "categoria":"Antiguedades",
+        "carac": "Estatua baiarines de porcelana",
+        "precio":20000 ,
+        "img": "porcelana.jpg" 
+
+    },
+    {
+        "id": 4,
+        "categoria":"Joyas", 
+        "carac":"Broche colibri de plata " ,
+        "precio":9000 ,
+        "img": "joya1.jpg"
+
+    }
+]
